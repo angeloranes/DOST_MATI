@@ -74,7 +74,7 @@ const SUPER_ADMIN_ROUTES: NavItem[] = [
 const DIVISION_ROUTES: NavItem[] = [
   {
     name: "Assigned Documents",
-    path: "division/assigned-documents",
+    path: "/division/dashboard",
     icon: <AssignedDocumentsIcon />,
     roles: [4],
   },

@@ -22,7 +22,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  app.use("/ai/extract", withRateLimit);
+  app.use("/extraction", withRateLimit);
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

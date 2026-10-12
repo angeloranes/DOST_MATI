@@ -12,7 +12,7 @@ export class GeminiExtractorService implements LlmExtractor {
   private readonly logger = new Logger(GeminiExtractorService.name);
 
   private readonly client: GoogleGenAI;
-  private readonly model = process.env.GEMINI_MODEL ?? "gemini-3.8-flash";
+  private readonly model = process.env.GEMINI_MODEL ?? "gemini-3-flash-preview";
 
   private readonly maxAttempts = 4;
   private readonly initialRetryDelayMs = 1_000;
@@ -79,7 +79,7 @@ export class GeminiExtractorService implements LlmExtractor {
     for (let attempt = 1; attempt <= this.maxAttempts; attempt++) {
       try {
         return await this.client.models.generateContent({
-          model: "gemini-3-flash-preview",
+          model: this.model,
 
           contents: prompt,
 

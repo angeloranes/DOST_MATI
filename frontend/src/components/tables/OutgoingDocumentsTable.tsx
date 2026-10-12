@@ -192,7 +192,7 @@ function MobileCard({
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function OutgoingDocumentsTable() {
-  const [records, setRecords] = useState<OutgoingDocument[]>(mockData);
+  const [records] = useState<OutgoingDocument[]>(mockData);
   const [search, setSearch] = useState("");
   const [filterDateFrom, setFilterDateFrom] = useState("");
   const [filterDateTo, setFilterDateTo] = useState("");

@@ -11,8 +11,9 @@
  *
  * Rendering rules:
  *   - Renders one radio button per DIRECTION_OPTIONS entry.
- *   - The selected button has aria-checked="true".
- *   - Clicking a button calls onChange with its value.
+ *   - The selected option's native radio input is `checked`.
+ *   - Clicking a different button calls onChange with its value.
+ *   - Clicking an already-selected button does not emit a change.
  *   - When disabled, all buttons have disabled attribute.
  *   - The wrapping div has role="radiogroup" and aria-label="Document type".
  *   - Active button gets secondary border + ring; inactive gets gray border.
@@ -65,24 +66,24 @@ describe("DocumentTypeSelektor", () => {
   });
 
   describe("selection state", () => {
-    it("marks the incoming button as aria-checked='true' when value='incoming'", () => {
+    it("marks the incoming radio as checked when value='incoming'", () => {
       render(
         <DocumentTypeSelector value="incoming" onChange={() => {}} />,
       );
 
       const radios = screen.getAllByRole("radio");
-      expect(radios[0]).toHaveAttribute("aria-checked", "true");
-      expect(radios[1]).toHaveAttribute("aria-checked", "false");
+      expect(radios[0]).toBeChecked();
+      expect(radios[1]).not.toBeChecked();
     });
 
-    it("marks the outgoing button as aria-checked='true' when value='outgoing'", () => {
+    it("marks the outgoing radio as checked when value='outgoing'", () => {
       render(
         <DocumentTypeSelector value="outgoing" onChange={() => {}} />,
       );
 
       const radios = screen.getAllByRole("radio");
-      expect(radios[0]).toHaveAttribute("aria-checked", "false");
-      expect(radios[1]).toHaveAttribute("aria-checked", "true");
+      expect(radios[0]).not.toBeChecked();
+      expect(radios[1]).toBeChecked();
     });
   });
 
@@ -120,8 +121,9 @@ describe("DocumentTypeSelektor", () => {
       const radios = screen.getAllByRole("radio");
       fireEvent.click(radios[0]);
 
-      // onChange is still called (button onClick fires), but with the same value.
-      expect(onChange).toHaveBeenCalledWith("incoming");
+      // A native radio that is already checked does not emit a change event,
+      // so the value (and therefore onChange) stays untouched.
+      expect(onChange).not.toHaveBeenCalled();
     });
   });
 

@@ -9,6 +9,7 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import type { Request, Response } from "express";
+import { authCookieOptions } from "../cookie-options";
 import { Public } from "../decorators/public.decorator";
 import { LoginDto } from "../dto/login.dto";
 import { VerifyPasswordDto } from "../dto/verify-password.dto";
@@ -28,18 +29,12 @@ export class AuthenticationController {
     const result = await this.authenticationService.login(dto);
 
     res.cookie("refresh_token", result.refresh_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/authentication",
+      ...authCookieOptions("/authentication"),
       maxAge: result.refresh_token_max_age_ms,
     });
 
     res.cookie("access_token", result.access_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
+      ...authCookieOptions("/"),
       maxAge: 3 * 1000, // 3 seconds
     });
     return {
@@ -55,18 +50,12 @@ export class AuthenticationController {
     const result = await this.authenticationService.refresh(refreshToken);
 
     res.cookie("access_token", result.access_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "productzion",
-      sameSite: "lax",
-      path: "/",
+      ...authCookieOptions("/"),
       maxAge: 15 * 60 * 1000,
     });
 
     res.cookie("refresh_token", result.refresh_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/authentication",
+      ...authCookieOptions("/authentication"),
       maxAge: result.refresh_token_max_age_ms,
     });
 
@@ -93,19 +82,9 @@ export class AuthenticationController {
 
     await this.authenticationService.logout(refreshToken);
 
-    res.clearCookie("refresh_token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/authentication",
-    });
+    res.clearCookie("refresh_token", authCookieOptions("/authentication"));
 
-    res.clearCookie("access_token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-    });
+    res.clearCookie("access_token", authCookieOptions("/"));
 
     return {
       message: "Logout successfully",

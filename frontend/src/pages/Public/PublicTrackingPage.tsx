@@ -14,7 +14,7 @@
 //
 // and drop MOCK_RECORD.
 
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { Link } from "react-router";
 import PageMeta from "../../components/common/PageMeta";
 import CompanyLogo from "../../components/logo/CompanyLogo";

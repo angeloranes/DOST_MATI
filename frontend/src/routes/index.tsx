@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import AccessControlPage from "../features/access-control/components/AccessControlPage";
 import ResetPassword from "../features/auth/authentication/components/ResetPassword";
 import SignIn from "../features/auth/authentication/components/SignIn";
@@ -17,16 +17,14 @@ import ReceiverUploadPage from "../features/documents/extraction/receiver/compon
 import UserManagementPage from "../features/user-management/components/UserManagementPage";
 import AppLayout from "../layout/AppLayout";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard";
+import DivisionDashboard from "../pages/Dashboard/DivisionDashboard";
 import ReceiverDashboard from "../pages/Dashboard/ReceiverDashboard";
 import StaleDocumentsPage from "../pages/Dashboard/StaleDocumentsPage";
 import SuperAdminDashboard from "../pages/Dashboard/SuperAdminDashboard";
-import AssignedDocumentPage from "../pages/Division/AssignedDocumentPage";
 import IncomingDocPage from "../pages/document/IncomingDocPage";
 import InvalidDocumentPage from "../pages/document/InvalidDocumentPage";
 import InvalidDocumentsPage from "../pages/document/InvalidDocumentsPage";
 import OutgoingDocPage from "../pages/document/OutgoingDocPage";
-import UploadedIncomingDocPage from "../pages/document/UploadedIncomingDocPage";
-import ValudationQueue from "../pages/document/UploadQueue";
 import SystemLogsPage from "../pages/Logs/SystemLogsPage";
 import NotificationPage from "../pages/notification/NotificationPage";
 import NotFound from "../pages/OtherPage/NotFound";
@@ -220,8 +218,16 @@ const RECEIVING_OFFICER_ROUTES: RouteType[] = [
 
 const DIVISION_ROUTE: RouteType[] = [
   {
+    path: "/division/dashboard",
+    element: (
+      <RoleRoute allowedRoles={[4]}>
+        <DivisionDashboard />
+      </RoleRoute>
+    ),
+  },
+  {
     path: "/division/assigned-documents",
-    element: <AssignedDocumentPage />,
+    element: <Navigate to="/division/dashboard" replace />,
   },
 ];
 

@@ -5,7 +5,7 @@ import PageMeta from "../../components/common/PageMeta";
 import IncomingDocumentsTable from "../../components/tables/IncomingDocumentsTable";
 
 export default function IncomingDocPage() {
-  const [auditLogOpen, setAuditLogOpen] = useState(false);
+  const [, setAuditLogOpen] = useState(false);
 
   return (
     <>

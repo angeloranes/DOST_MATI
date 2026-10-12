@@ -9,6 +9,8 @@ import TableSkeleton from "./Skeleton/TableSkeleton";
 export interface TableShellColumn<T> extends TableSkeletonColumn {
   /** Renders this column's cell content for a given row. */
   render: (item: T, index: number) => ReactNode;
+  /** Optional custom header content; falls back to `label` when omitted. */
+  renderHeader?: () => ReactNode;
   /** Extra classes for this column's <td>. Can depend on the row's data. */
   cellClassName?: string | ((item: T) => string);
 }
@@ -160,7 +162,7 @@ export default function TableShell<T>({
                           isHeader
                           className="px-4 py-3 font-semibold text-primary text-start text-theme-xs dark:text-gray-300 whitespace-nowrap"
                         >
-                          {col.label}
+                          {col.renderHeader ? col.renderHeader() : col.label}
                         </TableCell>
                       ))}
                     </TableRow>

@@ -407,10 +407,19 @@ export default function InvalidDocumentsTable() {
 
                         <TableCell className="px-3 py-3">
                           <KebabMenu
-                            record={record}
-                            openMenuId={openMenuId}
-                            setOpenMenuId={setOpenMenuId}
-                            onDelete={openDeleteModal}
+                            actions={[
+                              {
+                                label: "View",
+                                icon: <Eye className="h-4 w-4" />,
+                                handler: () => console.log("[View] Record:", record),
+                              },
+                              {
+                                label: "Delete",
+                                icon: <Trash className="h-4 w-4" />,
+                                handler: () => openDeleteModal(record),
+                                danger: true,
+                              },
+                            ]}
                           />
                         </TableCell>
                       </TableRow>

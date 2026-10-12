@@ -1,4 +1,3 @@
-import React from "react";
 import type { DocumentType } from "./types";
 
 interface DocumentTypeToggleProps {

@@ -183,7 +183,6 @@ function MobileCard({
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function DivisionIncomingDocumentsTable({
-  division,
   records,
   onRecordsChange,
   statusFilter,

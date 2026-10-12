@@ -39,6 +39,11 @@ interface IncomingDocument {
   remarks: string | null;
 }
 
+/** Shape returned by the API, before `status` is mapped to its display value. */
+interface RawIncomingDocument extends Omit<IncomingDocument, "status"> {
+  status: "pending" | "ongoing" | "complete";
+}
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function mapBackendStatus(status: "pending" | "ongoing" | "complete"): StatusType {
@@ -252,7 +257,7 @@ export default function IncomingDocumentsTable() {
       setFetchError(null);
       try {
         const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
-        const response = await axios.get<IncomingDocument[]>(`${apiUrl}/incoming`);
+        const response = await axios.get<RawIncomingDocument[]>(`${apiUrl}/incoming`);
         if (!cancelled) {
           const mapped = response.data.map((doc) => ({
             ...doc,
@@ -340,9 +345,6 @@ export default function IncomingDocumentsTable() {
       const allDivisions = await axios.get<DivisionListItem[]>(`${apiUrl}/divisions`);
       const nameToId = new Map(
         allDivisions.data.map((d: DivisionListItem) => [d.name, d.id]),
-      );
-      const idToName = new Map(
-        allDivisions.data.map((d: DivisionListItem) => [d.id, d.name]),
       );
 
       const currentDivisionNames = routedRecord.routedDivisions.map(

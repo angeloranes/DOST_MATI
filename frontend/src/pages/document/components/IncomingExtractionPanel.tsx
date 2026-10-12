@@ -2,7 +2,6 @@ import ReactMarkdown from "react-markdown";
 import DivisionMultiSelect from "./DivisionMultiSelect";
 import EmptyState from "./EmptyState";
 import Field from "./Field";
-import FieldSkeleton from "./FieldSkeleton";
 import SectionDivider from "./SectionDivider";
 import type { ExtractionStatus, IncomingMetadata } from "./types";
 

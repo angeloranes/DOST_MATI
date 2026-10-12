@@ -12,6 +12,7 @@ import OutgoingExtractionPanel from "./components/OutgoingExtractionPanel";
 import PdfPreviewPanel from "./components/PdfPreviewPanel";
 import { useIncomingExtraction } from "./components/useIncomingExtraction";
 import { useOutgoingExtraction } from "./components/useOutgoingExtraction";
+import type { DocumentType } from "./components/types";
 
 export default function DocumentUplosigninadPage() {
   const [docType, setDocType] = useState<DocumentType>("incoming");

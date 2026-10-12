@@ -8,6 +8,14 @@ import { defineConfig } from "vitest/config";
  * before running:  pnpm add -D vitest happy-dom @testing-library/react @testing-library/jest-dom
  */
 export default defineConfig({
+  // Match the app's `"jsx": "react-jsx"` (tsconfig.app.json). Without this,
+  // Vitest's esbuild transform falls back to the classic runtime and every
+  // test file that uses JSX without importing React throws
+  // "React is not defined".
+  esbuild: {
+    jsx: "automatic",
+    jsxImportSource: "react",
+  },
   test: {
     environment: "happy-dom",
     globals: true, // required so @testing-library/jest-dom can reference global `expect`

@@ -139,7 +139,6 @@ export default function ExtractedQueueTable({
   }
 
   const selectColumn: TableShellColumn<ExtractedDocumentQueue> = {
-    id: "select",
     label: "",
     width: "w-4",
     renderHeader: () => (

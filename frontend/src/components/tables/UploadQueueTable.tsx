@@ -59,7 +59,7 @@ export default function UploadQueueTable() {
       }
     }
     fetchData();
-  }, [userId]);
+  }, []);
 
   const filtered = data.filter((r) => {
     const q = search.toLowerCase();

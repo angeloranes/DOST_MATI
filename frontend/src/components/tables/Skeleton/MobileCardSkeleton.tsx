@@ -40,11 +40,11 @@ export default function MobileCardSkeleton({
               <Skeleton className="h-4 w-2/5" />
               <Skeleton className="h-3 w-1/3 opacity-70" />
             </div>
-            <Skeleton className="h-5 w-5 shrink-0" rounded="rounded-md" />
+            <Skeleton className="h-5 w-5 shrink-0 rounded-md" />
           </div>
 
           <div className="mt-3 flex items-center gap-2">
-            <Skeleton className="h-5 w-16" rounded="rounded-full" />
+            <Skeleton className="h-5 w-16 rounded-full" />
             <Skeleton className="h-3 w-20 opacity-70" />
           </div>
 

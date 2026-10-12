@@ -13,18 +13,6 @@ import { useNotifications } from "../../context/NotificationsContext";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-interface Notification {
-  id: number;
-  userName: string;
-  role: "super-admin" | "admin" | "receiver";
-  description: string;
-  time: string;
-  date: string;
-  type: NotificationType;
-  link?: string;
-  isRead: boolean;
-}
-
 // ─── Role-based visibility ────────────────────────────────────────────────────
 
 // role 1 = super_admin, role 2 = admin, role 3 = receiver
